@@ -2,8 +2,11 @@
 #include <QDebug>
 #include <cstdlib>
 
+const float Game::ONE_SECOND = 1000.0f;//in milisecond
+const float Game::HALF_SECOND = 500.0f;
+
 Game::Game()
-    : M(20), N(10), m_dx(0), m_rotate(false), m_colorNum(1), m_timer(0), m_delay(0.3)
+    : M(20), N(10), m_dx(0), m_rotate(false), m_colorNum(1), m_timer(0), m_delay(ONE_SECOND)
 {
     for(int i = 0; i < M; ++i)
     {
@@ -11,6 +14,14 @@ Game::Game()
         {
             m_field[i][j] = 0;
         }
+    }
+    //set zero for points
+    for(int i = 0; i < 4; ++i)
+    {
+        m_a[i].x = 0;
+        m_a[i].y = 0;
+        m_b[i].x = 0;
+        m_b[i].y = 0;
     }
 
     //I

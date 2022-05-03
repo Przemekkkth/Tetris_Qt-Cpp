@@ -11,9 +11,12 @@ public:
     const int M;
     const int N;
 
+    static const float ONE_SECOND;
+    static const float HALF_SECOND;
+
     int m_field[20][10];
 
-    Point m_a[4], b_[4];
+    Point m_a[4], m_b[4];
 
     int m_figures[7][4];
 

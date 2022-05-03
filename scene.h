@@ -6,6 +6,7 @@
 #include "game.h"
 #include <QGraphicsPixmapItem>
 #include <QTimer>
+#include <QElapsedTimer>
 
 class Scene : public QGraphicsScene
 {
@@ -18,6 +19,7 @@ private:
 
     const float timePerFrame;
     QTimer *timer;
+
     // QGraphicsScene interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
