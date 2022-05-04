@@ -131,7 +131,7 @@ void Scene::update()
         {
          for (int i=0;i<4;i++)
          {
-             qDebug() << "game.m_b[i].y " << game.m_b[i].y << " game.m_b[i].x " << game.m_b[i].x;
+             //qDebug() << "game.m_b[i].y " << game.m_b[i].y << " game.m_b[i].x " << game.m_b[i].x;
              game.m_field[game.m_b[i].y][game.m_b[i].x] = game.m_colorNum;
          }
 
@@ -177,7 +177,7 @@ void Scene::update()
 
     for (int i=0;i<4;i++)
     {
-        QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(game.m_tile.copy(game.m_colorNum, 0, 18, 18));
+        QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(game.m_tile.copy(game.m_colorNum * 18, 0, 18, 18));
         addItem(pixmapItem);
         pixmapItem->setPos(game.m_a[i].x * 18, game.m_a[i].y * 18);
         pixmapItem->moveBy(28, 31);
