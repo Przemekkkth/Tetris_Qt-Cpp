@@ -3,6 +3,5 @@
         <file>images/tiles.png</file>
         <file>images/frame.png</file>
         <file>images/background.png</file>
-        <file>images/background1.png</file>
     </qresource>
 </RCC>

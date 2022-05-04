@@ -87,11 +87,10 @@ void Scene::update()
     game.m_timer += (timePerFrame);
     qDebug() << "timer " << game.m_timer;
     clear();
-    //m_background = new QGraphicsPixmapItem(game.m_background);
-    //addItem(m_background);
-    QGraphicsPixmapItem* bg1 = new QGraphicsPixmapItem(QPixmap(":/images/background1.png"));
-    bg1->moveBy(28, 31);
-    addItem(bg1);
+    m_frame = new QGraphicsPixmapItem(game.m_frame);
+    addItem(m_frame);
+    m_frame->moveBy(28, 31);
+
 
     //// <- Move -> ///
     for (int i= 0;i<4;i++)
@@ -181,7 +180,7 @@ void Scene::update()
             QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(game.m_tile.copy(game.m_field[i][j]*18, 0, 18, 18));
             addItem(pixmapItem);
             pixmapItem->setPos(j*18, i*18);
-            pixmapItem->moveBy(28, 31);
+            pixmapItem->moveBy(m_frame->pos().x(), m_frame->pos().y());
         }
 
     }
@@ -191,6 +190,6 @@ void Scene::update()
         QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(game.m_tile.copy(game.m_colorNum * 18, 0, 18, 18));
         addItem(pixmapItem);
         pixmapItem->setPos(game.m_a[i].x * 18, game.m_a[i].y * 18);
-        pixmapItem->moveBy(28, 31);
+        pixmapItem->moveBy(m_frame->pos().x(), m_frame->pos().y());
     }
 }
