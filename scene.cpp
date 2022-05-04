@@ -79,8 +79,11 @@ void Scene::update()
     game.m_timer += (timePerFrame);
     qDebug() << "timer " << game.m_timer;
     clear();
-    m_background = new QGraphicsPixmapItem(game.m_background);
-    addItem(m_background);
+    //m_background = new QGraphicsPixmapItem(game.m_background);
+    //addItem(m_background);
+    QGraphicsPixmapItem* bg1 = new QGraphicsPixmapItem(QPixmap(":/images/background1.png"));
+    bg1->moveBy(28, 31);
+    addItem(bg1);
 
     //// <- Move -> ///
     for (int i= 0;i<4;i++)
