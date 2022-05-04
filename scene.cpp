@@ -25,18 +25,22 @@ void Scene::keyPressEvent(QKeyEvent *event)
         switch(event->key())
         {
         case Qt::Key_Left:
+        case Qt::Key_A:
             game.m_dx = -1;
             break;
 
         case Qt::Key_Right:
+        case Qt::Key_D:
             game.m_dx = 1;
             break;
 
         case Qt::Key_Up:
+        case Qt::Key_W:
             game.m_rotate = true;
             break;
 
         case Qt::Key_Down:
+        case Qt::Key_S:
             game.m_delay = Game::SPEED_UP;
             break;
         default:
@@ -58,14 +62,18 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
         {
         case Qt::Key_Left:
         case Qt::Key_Right:
+        case Qt::Key_A:
+        case Qt::Key_D:
             game.m_dx = 0;
             break;
 
         case Qt::Key_Up:
+        case Qt::Key_W:
             game.m_rotate = false;
             break;
 
         case Qt::Key_Down:
+        case Qt::Key_S:
             game.m_delay = Game::SPEED;
         default:
             break;
@@ -123,7 +131,7 @@ void Scene::update()
 
     ///////Tick//////
     if ( game.m_timer > game.m_delay)
-      {
+    {
         for (int i=0;i<4;i++)
         {
             game.m_b[i] = game.m_a[i];
@@ -132,23 +140,23 @@ void Scene::update()
 
         if (!game.check())
         {
-         for (int i=0;i<4;i++)
-         {
-             //qDebug() << "game.m_b[i].y " << game.m_b[i].y << " game.m_b[i].x " << game.m_b[i].x;
-             game.m_field[game.m_b[i].y][game.m_b[i].x] = game.m_colorNum;
-         }
+            for (int i=0;i<4;i++)
+            {
+                //qDebug() << "game.m_b[i].y " << game.m_b[i].y << " game.m_b[i].x " << game.m_b[i].x;
+                game.m_field[game.m_b[i].y][game.m_b[i].x] = game.m_colorNum;
+            }
 
-         game.m_colorNum = 1+rand()%7;
-         int n=rand()%7;
-         for (int i=0;i<4;i++)
-           {
-            game.m_a[i].x = game.m_figures[n][i] % 2;
-            game.m_a[i].y = game.m_figures[n][i] / 2;
-           }
+            game.m_colorNum = 1+rand()%7;
+            int n=rand()%7;
+            for (int i=0;i<4;i++)
+            {
+                game.m_a[i].x = game.m_figures[n][i] % 2;
+                game.m_a[i].y = game.m_figures[n][i] / 2;
+            }
         }
 
         game.m_timer=0;
-      }
+    }
     ///////check lines//////////
     int k=game.M-1;
     for (int i=game.M-1;i>0;i--)
