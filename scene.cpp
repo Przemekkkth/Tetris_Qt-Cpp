@@ -15,10 +15,6 @@ Scene::Scene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(100
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Scene::update);
     timer->start(timePerFrame);
-
-
-    //game.m_field[0][0] = 1;
-    //game.m_field[3][3] = 3;
 }
 
 void Scene::keyPressEvent(QKeyEvent *event)
@@ -41,7 +37,7 @@ void Scene::keyPressEvent(QKeyEvent *event)
             break;
 
         case Qt::Key_Down:
-            game.m_delay = 0.05;
+            game.m_delay = Game::SPEED_UP;
             break;
         default:
             break;
@@ -70,7 +66,7 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
             break;
 
         case Qt::Key_Down:
-            game.m_delay = 0.03;
+            game.m_delay = Game::SPEED;
         default:
             break;
         }
@@ -119,6 +115,7 @@ void Scene::update()
                 game.m_a[i] = game.m_b[i];
             }
         }
+        game.m_rotate = false;
     }
 
     ///////Tick//////
@@ -149,6 +146,21 @@ void Scene::update()
 
         game.m_timer=0;
       }
+    ///////check lines//////////
+    int k=game.M-1;
+    for (int i=game.M-1;i>0;i--)
+    {
+        int count=0;
+        for (int j=0;j<game.N;j++)
+        {
+            if (game.m_field[i][j]) count++;
+            game.m_field[k][j]= game.m_field[i][j];
+        }
+        if (count<game.N) k--;
+    }
+
+    game.m_dx=0; game.m_rotate=false; //game.m_delay = Game::SPEED;
+
     //draw
     for (int i=0;i<game.M;i++)
     {

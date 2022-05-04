@@ -11,8 +11,8 @@ public:
     const int M;
     const int N;
 
-    static const float ONE_SECOND;
-    static const float HALF_SECOND;
+    static const float SPEED;
+    static const float SPEED_UP;
 
     int m_field[20][10];
 

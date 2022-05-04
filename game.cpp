@@ -2,11 +2,11 @@
 #include <QDebug>
 #include <cstdlib>
 
-const float Game::ONE_SECOND = 1000.0f;//in milisecond
-const float Game::HALF_SECOND = 500.0f;
+const float Game::SPEED = 750.0f;//in milisecond
+const float Game::SPEED_UP = 200.0f;//in milisecond
 
 Game::Game()
-    : M(20), N(10), m_dx(0), m_rotate(false), m_colorNum(1), m_timer(0), m_delay(ONE_SECOND)
+    : M(20), N(10), m_dx(0), m_rotate(false), m_colorNum(1), m_timer(0), m_delay(SPEED)
 {
     for(int i = 0; i < M; ++i)
     {
