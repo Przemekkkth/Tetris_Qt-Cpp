@@ -70,9 +70,9 @@ Game::Game()
     m_figures[6][3] = 5;
 
     //load textures
-    if( !m_background.load(":/images/background.png") )
+    if( !m_background.load(":/images/bg_beach.png") )
     {
-        qDebug() << "Failed to load: " << ":/images/background.png";
+        qDebug() << "Failed to load: " << ":/images/bg_beach.png";
     }
     if( !m_frame.load(":/images/frame.png") )
     {

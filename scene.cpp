@@ -85,11 +85,16 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
 void Scene::update()
 {
     game.m_timer += (timePerFrame);
-    qDebug() << "timer " << game.m_timer;
+    //qDebug() << "timer " << game.m_timer;
     clear();
+
+    m_background = new QGraphicsPixmapItem(game.m_background.scaled(sceneRect().width(), sceneRect().height()));
+    addItem(m_background);
+
     m_frame = new QGraphicsPixmapItem(game.m_frame);
     addItem(m_frame);
     m_frame->moveBy(28, 31);
+
 
 
     //// <- Move -> ///
