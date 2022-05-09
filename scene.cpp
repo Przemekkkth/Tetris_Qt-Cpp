@@ -21,7 +21,7 @@ void Scene::keyPressEvent(QKeyEvent *event)
 {
     if( !event->isAutoRepeat() )
     {
-        qDebug() << "Pressed key: " << event->key();
+        //qDebug() << "Pressed key: " << event->key();
         switch(event->key())
         {
         case Qt::Key_Left:
@@ -57,7 +57,7 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
 {
     if( !event->isAutoRepeat() )
     {
-        qDebug() << "Released key: " << event->key();
+        //qDebug() << "Released key: " << event->key();
         switch(event->key())
         {
         case Qt::Key_Left:
@@ -150,7 +150,7 @@ void Scene::update()
                 game.m_field[game.m_b[i].y][game.m_b[i].x] = game.m_colorNum;
             }
 
-            game.m_colorNum = 1+rand()%7;
+            game.m_colorNum = (rand() % (Game::COUNT_OF_COLORS - 1)) + 1;
             int n=rand()%7;
             for (int i=0;i<4;i++)
             {

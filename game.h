@@ -13,6 +13,7 @@ public:
 
     static const float SPEED;
     static const float SPEED_UP;
+    static const int COUNT_OF_COLORS;
 
     int m_field[20][10];
 

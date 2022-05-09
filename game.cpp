@@ -6,6 +6,7 @@
 //change to increase or decrease speed of game.
 const float Game::SPEED = 500.0f;//in milisecond
 const float Game::SPEED_UP = 100.0f;//in milisecond
+const int Game::COUNT_OF_COLORS = 10;
 
 Game::Game()
     : M(20), N(10), m_dx(0), m_rotate(false), m_colorNum(1), m_timer(0), m_delay(SPEED)
