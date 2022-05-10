@@ -95,7 +95,10 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
 
 void Scene::update()
 {
-    game.m_timer += (timePerFrame);
+    if(game.m_state == Game::State::Active)
+    {
+       game.m_timer += (timePerFrame);
+    }
     clear();
 
     m_background = new QGraphicsPixmapItem(game.m_background.scaled(sceneRect().width(), sceneRect().height()));
@@ -104,8 +107,6 @@ void Scene::update()
     m_frame = new QGraphicsPixmapItem(game.m_frame);
     addItem(m_frame);
     m_frame->moveBy(28, 31);
-
-
 
     //// <- Move -> ///
     for (int i = 0; i < Game::COUNT_OF_BLOCKS ;i++)
@@ -206,5 +207,11 @@ void Scene::update()
         addItem(pixmapItem);
         pixmapItem->setPos(game.m_a[i].x * Game::BLOCK_SIZE.width(), game.m_a[i].y * Game::BLOCK_SIZE.height());
         pixmapItem->moveBy(m_frame->pos().x(), m_frame->pos().y());
+    }
+
+    if(game.m_state == Game::State::Paused)
+    {
+        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(game.m_pauseBackground);
+        addItem(item);
     }
 }
