@@ -36,6 +36,14 @@ public:
     QPixmap m_tile;
     QPixmap m_background;
     QPixmap m_frame;
+
+    QPixmap m_pauseBackground;
+
+    enum class State{
+        Active, Paused, Game_Over
+    };
+
+    State m_state;
 };
 
 #endif // GAME_H

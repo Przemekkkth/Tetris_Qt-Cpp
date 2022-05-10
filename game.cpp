@@ -6,14 +6,17 @@
 //change to increase or decrease speed of game.
 const float Game::SPEED = 500.0f;//in milisecond
 const float Game::SPEED_UP = 100.0f;//in milisecond
+
 const int Game::COUNT_OF_COLORS = 10;
 const int Game::COUNT_OF_FIGURES = 7;
 const int Game::COUNT_OF_BLOCKS = 4;
+
 QSize Game::BLOCK_SIZE = QSize(18, 18);
 QSize Game::RESOLUTION = QSize(320, 480);
 
 Game::Game()
-    : BOARD_HEIGHT(20), BOARD_WIDTH(10), m_dx(0), m_rotate(false), m_colorNum(1), m_timer(0), m_delay(SPEED)
+    : BOARD_HEIGHT(20), BOARD_WIDTH(10), m_dx(0), m_rotate(false),
+      m_colorNum(1), m_timer(0), m_delay(SPEED), m_state(State::Active)
 {
     for(int i = 0; i < BOARD_HEIGHT; ++i)
     {
@@ -87,6 +90,10 @@ Game::Game()
     {
         qDebug() << "Failed to load: " << ":/images/tiles.png";
     }
+    if( !m_pauseBackground.load(":/images/bg_pause.png") )
+    {
+        qDebug() << "Failed to load: " << ":/images/bg_pause.png";
+    }
 }
 
 bool Game::check()
@@ -102,6 +109,5 @@ bool Game::check()
             return false;
         }
     }
-
     return true;
 }

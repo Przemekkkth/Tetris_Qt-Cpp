@@ -3,5 +3,7 @@
         <file>images/tiles.png</file>
         <file>images/frame.png</file>
         <file>images/bg_beach.png</file>
+        <file>images/cursor.png</file>
+        <file>images/bg_pause.png</file>
     </qresource>
 </RCC>

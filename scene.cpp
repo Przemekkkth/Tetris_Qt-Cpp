@@ -43,6 +43,17 @@ void Scene::keyPressEvent(QKeyEvent *event)
         case Qt::Key_S:
             game.m_delay = Game::SPEED_UP;
             break;
+        case Qt::Key_P:
+            if(game.m_state == Game::State::Active)
+            {
+                game.m_state = Game::State::Paused;
+            }
+            else if( game.m_state == Game::State::Paused )
+            {
+                game.m_state = Game::State::Active;
+            }
+            break;
+
         default:
             break;
         }
