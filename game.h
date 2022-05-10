@@ -8,12 +8,17 @@ class Game
 public:
     Game();
 
-    const int M;
-    const int N;
+    const int BOARD_HEIGHT;
+    const int BOARD_WIDTH;
 
     static const float SPEED;
     static const float SPEED_UP;
     static const int COUNT_OF_COLORS;
+    static const int COUNT_OF_FIGURES;
+    static const int COUNT_OF_BLOCKS;
+    static QSize BLOCK_SIZE;
+    static QSize RESOLUTION;
+
 
     int m_field[20][10];
 

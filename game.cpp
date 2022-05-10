@@ -7,13 +7,17 @@
 const float Game::SPEED = 500.0f;//in milisecond
 const float Game::SPEED_UP = 100.0f;//in milisecond
 const int Game::COUNT_OF_COLORS = 10;
+const int Game::COUNT_OF_FIGURES = 7;
+const int Game::COUNT_OF_BLOCKS = 4;
+QSize Game::BLOCK_SIZE = QSize(18, 18);
+QSize Game::RESOLUTION = QSize(320, 480);
 
 Game::Game()
-    : M(20), N(10), m_dx(0), m_rotate(false), m_colorNum(1), m_timer(0), m_delay(SPEED)
+    : BOARD_HEIGHT(20), BOARD_WIDTH(10), m_dx(0), m_rotate(false), m_colorNum(1), m_timer(0), m_delay(SPEED)
 {
-    for(int i = 0; i < M; ++i)
+    for(int i = 0; i < BOARD_HEIGHT; ++i)
     {
-        for(int j = 0; j < N; ++j)
+        for(int j = 0; j < BOARD_WIDTH; ++j)
         {
             m_field[i][j] = 0;
         }
@@ -89,7 +93,7 @@ bool Game::check()
 {
     for (int i=0;i<4;i++)
     {
-        if (m_a[i].x<0 || m_a[i].x>=N || m_a[i].y>=M)
+        if (m_a[i].x<0 || m_a[i].x>=BOARD_WIDTH || m_a[i].y>=BOARD_HEIGHT)
         {
             return false;
         }

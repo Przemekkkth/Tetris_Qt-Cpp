@@ -4,7 +4,7 @@
 
 Scene::Scene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(1000.0f/60.0f)
 {
-    setSceneRect(0,0, 320, 480);
+    setSceneRect(0,0, Game::RESOLUTION.width(), Game::RESOLUTION.height() );
     srand(time(0));
 
     m_frame = new QGraphicsPixmapItem(game.m_frame);
@@ -85,7 +85,6 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
 void Scene::update()
 {
     game.m_timer += (timePerFrame);
-    //qDebug() << "timer " << game.m_timer;
     clear();
 
     m_background = new QGraphicsPixmapItem(game.m_background.scaled(sceneRect().width(), sceneRect().height()));
@@ -98,7 +97,7 @@ void Scene::update()
 
 
     //// <- Move -> ///
-    for (int i= 0;i<4;i++)
+    for (int i = 0; i < Game::COUNT_OF_BLOCKS ;i++)
     {
         game.m_b[i]= game.m_a[i];
         game.m_a[i].x += game.m_dx;
@@ -106,7 +105,7 @@ void Scene::update()
 
     if (!game.check())
     {
-        for (int i=0;i<4;i++)
+        for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
         {
             game.m_a[i] = game.m_b[i];
         }
@@ -116,7 +115,7 @@ void Scene::update()
     if (game.m_rotate)
     {
         Point p = game.m_a[1]; //center of rotation
-        for (int i=0;i<4;i++)
+        for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
         {
             int x = game.m_a[i].y-p.y;
             int y = game.m_a[i].x-p.x;
@@ -125,7 +124,7 @@ void Scene::update()
         }
         if (!game.check())
         {
-            for (int i=0;i<4;i++)
+            for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
             {
                 game.m_a[i] = game.m_b[i];
             }
@@ -136,7 +135,7 @@ void Scene::update()
     ///////Tick//////
     if ( game.m_timer > game.m_delay)
     {
-        for (int i=0;i<4;i++)
+        for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
         {
             game.m_b[i] = game.m_a[i];
             game.m_a[i].y+=1;
@@ -144,17 +143,17 @@ void Scene::update()
 
         if (!game.check())
         {
-            for (int i=0;i<4;i++)
+            for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
             {
                 //qDebug() << "game.m_b[i].y " << game.m_b[i].y << " game.m_b[i].x " << game.m_b[i].x;
                 game.m_field[game.m_b[i].y][game.m_b[i].x] = game.m_colorNum;
             }
 
             game.m_colorNum = (rand() % (Game::COUNT_OF_COLORS - 1)) + 1;
-            int n=rand()%7;
-            for (int i=0;i<4;i++)
+            int n= rand() % Game::COUNT_OF_FIGURES;
+            for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
             {
-                game.m_a[i].x = game.m_figures[n][i] % 2;
+                game.m_a[i].x = (game.m_figures[n][i] % 2) + game.BOARD_WIDTH/2-1;
                 game.m_a[i].y = game.m_figures[n][i] / 2;
             }
         }
@@ -162,39 +161,39 @@ void Scene::update()
         game.m_timer=0;
     }
     ///////check lines//////////
-    int k=game.M-1;
-    for (int i=game.M-1;i>0;i--)
+    int k=game.BOARD_HEIGHT-1;
+    for (int i= game.BOARD_HEIGHT-1; i > 0; i--)
     {
-        int count=0;
-        for (int j=0;j<game.N;j++)
+        int count = 0;
+        for (int j = 0; j < game.BOARD_WIDTH;j++)
         {
             if (game.m_field[i][j]) count++;
             game.m_field[k][j]= game.m_field[i][j];
         }
-        if (count<game.N) k--;
+        if (count<game.BOARD_WIDTH) k--;
     }
 
     game.m_dx=0; game.m_rotate=false; //game.m_delay = Game::SPEED;
 
     //draw
-    for (int i=0;i<game.M;i++)
+    for (int i=0;i<game.BOARD_HEIGHT;i++)
     {
-        for (int j=0;j<game.N;j++)
+        for (int j=0;j<game.BOARD_WIDTH;j++)
         {
             if (game.m_field[i][j]==0) continue;
             QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(game.m_tile.copy(game.m_field[i][j]*18, 0, 18, 18));
             addItem(pixmapItem);
-            pixmapItem->setPos(j*18, i*18);
+            pixmapItem->setPos(j * Game::BLOCK_SIZE.width(), i * Game::BLOCK_SIZE.height());
             pixmapItem->moveBy(m_frame->pos().x(), m_frame->pos().y());
         }
 
     }
 
-    for (int i=0;i<4;i++)
+    for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
     {
         QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(game.m_tile.copy(game.m_colorNum * 18, 0, 18, 18));
         addItem(pixmapItem);
-        pixmapItem->setPos(game.m_a[i].x * 18, game.m_a[i].y * 18);
+        pixmapItem->setPos(game.m_a[i].x * Game::BLOCK_SIZE.width(), game.m_a[i].y * Game::BLOCK_SIZE.height());
         pixmapItem->moveBy(m_frame->pos().x(), m_frame->pos().y());
     }
 }
