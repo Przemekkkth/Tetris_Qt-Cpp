@@ -44,6 +44,9 @@ public:
     };
 
     State m_state;
+
+    int m_score;
+    void addScore(int val);
 };
 
 #endif // GAME_H

@@ -16,7 +16,7 @@ QSize Game::RESOLUTION = QSize(320, 480);
 
 Game::Game()
     : BOARD_HEIGHT(20), BOARD_WIDTH(10), m_dx(0), m_rotate(false),
-      m_colorNum(1), m_timer(0), m_delay(SPEED), m_state(State::Active)
+      m_colorNum(1), m_timer(0), m_delay(SPEED), m_state(State::Active), m_score(0)
 {
     for(int i = 0; i < BOARD_HEIGHT; ++i)
     {
@@ -110,4 +110,9 @@ bool Game::check()
         }
     }
     return true;
+}
+
+void Game::addScore(int val)
+{
+    m_score += val;
 }

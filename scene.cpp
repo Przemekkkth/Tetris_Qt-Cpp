@@ -179,10 +179,18 @@ void Scene::update()
         int count = 0;
         for (int j = 0; j < game.BOARD_WIDTH;j++)
         {
-            if (game.m_field[i][j]) count++;
+            if (game.m_field[i][j]) {
+                count++;
+            }
             game.m_field[k][j]= game.m_field[i][j];
         }
-        if (count<game.BOARD_WIDTH) k--;
+        if (count < game.BOARD_WIDTH) {
+            k--;
+        }
+        else{
+            game.addScore(1);
+            qDebug() << "Score: " << game.m_score;
+        }
     }
 
     game.m_dx=0; game.m_rotate=false; //game.m_delay = Game::SPEED;
