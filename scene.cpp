@@ -167,29 +167,37 @@ void Scene::update()
             {
                 game.m_a[i].x = (game.m_figures[n][i] % 2) + game.BOARD_WIDTH/2-1;
                 game.m_a[i].y = game.m_figures[n][i] / 2;
+                if(game.m_field[game.m_a[i].y][game.m_a[i].x])
+                {
+                    qDebug() << "Game Over";
+                    game.m_gameOver = true;
+                }
             }
         }
 
         game.m_timer=0;
     }
     ///////check lines//////////
-    int k=game.BOARD_HEIGHT-1;
-    for (int i= game.BOARD_HEIGHT-1; i > 0; i--)
+    int k = game.BOARD_HEIGHT-1;
+    for (int i = game.BOARD_HEIGHT-1; i > 0; i--)
     {
         int count = 0;
         for (int j = 0; j < game.BOARD_WIDTH;j++)
         {
-            if (game.m_field[i][j]) {
+            if (game.m_field[i][j])
+            {
                 count++;
             }
             game.m_field[k][j]= game.m_field[i][j];
         }
-        if (count < game.BOARD_WIDTH) {
+        if (count < game.BOARD_WIDTH)
+        {
             k--;
         }
-        else{
+        else
+        {
             game.addScore(1);
-            qDebug() << "Score: " << game.m_score;
+            //qDebug() << "Score: " << game.m_score;
         }
     }
 
@@ -261,6 +269,12 @@ void Scene::update()
     if(game.m_state == Game::State::Paused)
     {
         QGraphicsPixmapItem* item = new QGraphicsPixmapItem(game.m_pauseBackground);
+        addItem(item);
+    }
+    if(game.m_gameOver)
+    {
+        game.m_state = Game::State::Game_Over;
+        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(game.m_gameOverBackground);
         addItem(item);
     }
 }

@@ -7,5 +7,6 @@
         <file>images/bg_pause.png</file>
         <file>images/score.png</file>
         <file>images/numbers.png</file>
+        <file>images/bg_gameover.png</file>
     </qresource>
 </RCC>

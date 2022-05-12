@@ -16,7 +16,7 @@ QSize Game::RESOLUTION = QSize(320, 480);
 
 Game::Game()
     : BOARD_HEIGHT(20), BOARD_WIDTH(10), m_dx(0), m_rotate(false),
-      m_colorNum(1), m_timer(0), m_delay(SPEED), m_state(State::Active), m_score(0)
+      m_colorNum(1), m_timer(0), m_delay(SPEED), m_state(State::Active), m_score(0), m_gameOver(false)
 {
     for(int i = 0; i < BOARD_HEIGHT; ++i)
     {
@@ -111,6 +111,10 @@ Game::Game()
     if( !m_numbersPixmap.load(":/images/numbers.png"))
     {
         qDebug() << "Failed to load: " << ":/images/numbers.png";
+    }
+    if( !m_gameOverBackground.load(":/images/bg_gameover.png"))
+    {
+        qDebug() << "Failed to load: " << ":/images/bg_gameover.png";
     }
 }
 
