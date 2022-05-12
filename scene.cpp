@@ -106,7 +106,7 @@ void Scene::update()
 
     m_frame = new QGraphicsPixmapItem(game.m_frame);
     addItem(m_frame);
-    m_frame->moveBy(28, 31);
+    m_frame->moveBy(15, 31);
 
     //// <- Move -> ///
     for (int i = 0; i < Game::COUNT_OF_BLOCKS ;i++)
@@ -216,6 +216,47 @@ void Scene::update()
         pixmapItem->setPos(game.m_a[i].x * Game::BLOCK_SIZE.width(), game.m_a[i].y * Game::BLOCK_SIZE.height());
         pixmapItem->moveBy(m_frame->pos().x(), m_frame->pos().y());
     }
+
+    QGraphicsPixmapItem* scorePixmapItem = new QGraphicsPixmapItem(game.m_scorePixmap.scaled(130,32));
+    addItem(scorePixmapItem);
+    scorePixmapItem->moveBy(190,270);
+    QString scoreText = QString::number(game.m_score);
+    int unityPartVal = 0;
+    int decimalPartValue = 0;
+    int hendredthPartValue = 0;
+
+    if(scoreText.length() == 1) // 0 - 9
+    {
+        unityPartVal = scoreText.toInt();
+        decimalPartValue = 0;
+        hendredthPartValue = 0;
+    }
+    else if(scoreText.length() == 2) // 10 - 99
+    {
+        unityPartVal = scoreText.last(1).toInt();
+        decimalPartValue = scoreText.first(1).toInt();
+        hendredthPartValue = 0;
+    }
+    else if(scoreText.length() == 3) // 100 - 999
+    {
+        unityPartVal = scoreText.last(1).toInt();
+        hendredthPartValue = scoreText.first(1).toInt();
+        QString copyVal = scoreText;
+        copyVal.chop(1);
+        decimalPartValue = copyVal.last(1).toInt();
+    }
+
+    QGraphicsPixmapItem* unityPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(unityPartVal*32, 0, 32, 32));
+    unityPartScoreItem->moveBy(Game::RESOLUTION.width()-32, scorePixmapItem->y()+32);
+    addItem(unityPartScoreItem);
+
+    QGraphicsPixmapItem* decimalPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(decimalPartValue*32, 0, 32, 32));
+    decimalPartScoreItem->moveBy(Game::RESOLUTION.width()-2*32, scorePixmapItem->y()+32);
+    addItem(decimalPartScoreItem);
+
+    QGraphicsPixmapItem* hundrethPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(hendredthPartValue*32, 0, 32, 32));
+    hundrethPartScoreItem->moveBy(Game::RESOLUTION.width()-3*32, scorePixmapItem->y()+32);
+    addItem(hundrethPartScoreItem);
 
     if(game.m_state == Game::State::Paused)
     {

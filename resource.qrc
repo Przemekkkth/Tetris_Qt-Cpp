@@ -5,5 +5,7 @@
         <file>images/bg_beach.png</file>
         <file>images/cursor.png</file>
         <file>images/bg_pause.png</file>
+        <file>images/score.png</file>
+        <file>images/numbers.png</file>
     </qresource>
 </RCC>

@@ -104,6 +104,14 @@ Game::Game()
     {
         qDebug() << "Failed to load: " << ":/images/bg_pause.png";
     }
+    if( !m_scorePixmap.load(":/images/score.png"))
+    {
+        qDebug() << "Failed to load: " << ":/images/score.png";
+    }
+    if( !m_numbersPixmap.load(":/images/numbers.png"))
+    {
+        qDebug() << "Failed to load: " << ":/images/numbers.png";
+    }
 }
 
 bool Game::check()
