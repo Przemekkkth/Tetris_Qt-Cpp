@@ -77,6 +77,16 @@ Game::Game()
     m_figures[6][2] = 4;
     m_figures[6][3] = 5;
 
+    //set init figure
+    srand(time(0));
+    m_colorNum = (rand() % (Game::COUNT_OF_COLORS - 1)) + 1;
+    int n = rand() % Game::COUNT_OF_FIGURES;
+    for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
+    {
+        m_a[i].x = (m_figures[n][i] % 2) + BOARD_WIDTH/2-1;
+        m_a[i].y = m_figures[n][i] / 2;
+    }
+
     //load textures
     if( !m_background.load(":/images/bg_beach.png") )
     {
