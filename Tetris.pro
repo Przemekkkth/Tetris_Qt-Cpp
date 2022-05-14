@@ -11,11 +11,13 @@ CONFIG += c++11
 SOURCES += \
     game.cpp \
     main.cpp \
+    menuscene.cpp \
     scene.cpp \
     view.cpp
 
 HEADERS += \
     game.h \
+    menuscene.h \
     point.h \
     scene.h \
     view.h

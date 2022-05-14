@@ -1,12 +1,13 @@
 #include "view.h"
 #include "scene.h"
+#include "menuscene.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Scene s;
+    MenuScene s;
     View w;
     w.setScene(&s);
     w.resize(QSize(s.sceneRect().size().width() + 2, s.sceneRect().size().height()+ 2));
