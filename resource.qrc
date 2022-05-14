@@ -8,5 +8,8 @@
         <file>images/score.png</file>
         <file>images/numbers.png</file>
         <file>images/bg_gameover.png</file>
+        <file>images/quit_text.png</file>
+        <file>images/start_text.png</file>
+        <file>images/options_text.png</file>
     </qresource>
 </RCC>
