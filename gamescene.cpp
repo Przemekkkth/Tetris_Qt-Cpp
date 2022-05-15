@@ -1,8 +1,8 @@
-#include "scene.h"
+#include "gamescene.h"
 #include <QKeyEvent>
 #include <QDebug>
 
-Scene::Scene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(1000.0f/60.0f)
+GameScene::GameScene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(1000.0f/60.0f)
 {
     setSceneRect(0,0, Game::RESOLUTION.width(), Game::RESOLUTION.height() );
     srand(time(0));
@@ -13,22 +13,22 @@ Scene::Scene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(100
 
     //m_tiles->update()
     timer = new QTimer(this);
-    connect(timer, &QTimer::timeout, this, &Scene::update);
+    connect(timer, &QTimer::timeout, this, &GameScene::update);
     //timer->start(timePerFrame);
 }
 
-void Scene::start()
+void GameScene::start()
 {
     game.reset();
     timer->start(timePerFrame);
 }
 
-void Scene::stop()
+void GameScene::stop()
 {
     timer->stop();
 }
 
-void Scene::keyPressEvent(QKeyEvent *event)
+void GameScene::keyPressEvent(QKeyEvent *event)
 {
     if( !event->isAutoRepeat() )
     {
@@ -74,7 +74,7 @@ void Scene::keyPressEvent(QKeyEvent *event)
     QGraphicsScene::keyPressEvent(event);
 }
 
-void Scene::keyReleaseEvent(QKeyEvent *event)
+void GameScene::keyReleaseEvent(QKeyEvent *event)
 {
     if( !event->isAutoRepeat() )
     {
@@ -103,7 +103,7 @@ void Scene::keyReleaseEvent(QKeyEvent *event)
     QGraphicsScene::keyReleaseEvent(event);
 }
 
-void Scene::update()
+void GameScene::update()
 {
     if(game.m_state == Game::State::Active)
     {

@@ -10,16 +10,16 @@ CONFIG += c++11
 
 SOURCES += \
     game.cpp \
+    gamescene.cpp \
     main.cpp \
     menuscene.cpp \
-    scene.cpp \
     view.cpp
 
 HEADERS += \
     game.h \
+    gamescene.h \
     menuscene.h \
     point.h \
-    scene.h \
     view.h
 
 # Default rules for deployment.

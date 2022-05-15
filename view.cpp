@@ -1,11 +1,11 @@
 #include "view.h"
 #include "game.h"
 #include "menuscene.h"
-#include "scene.h"
+#include "gamescene.h"
 #include <QApplication>
 
 View::View(QWidget *parent)
-    : QGraphicsView(parent), m_gameScene(new Scene()), m_menuScene(new MenuScene())
+    : QGraphicsView(parent), m_gameScene(new GameScene()), m_menuScene(new MenuScene())
 {
     setScene(m_menuScene);
     resize(Game::RESOLUTION.width()+2, Game::RESOLUTION.height()+2);
@@ -17,7 +17,7 @@ View::View(QWidget *parent)
 
 void View::createConnections()
 {
-    connect(m_gameScene, &Scene::goToMenuActivated, this, &View::menu);
+    connect(m_gameScene, &GameScene::goToMenuActivated, this, &View::menu);
 
     connect(m_menuScene, &MenuScene::startClicked, this, &View::start);
     connect(m_menuScene, &MenuScene::optionsClicked, this, &View::options);

@@ -1,5 +1,5 @@
 #include "view.h"
-#include "scene.h"
+#include "gamescene.h"
 #include "menuscene.h"
 
 #include <QApplication>

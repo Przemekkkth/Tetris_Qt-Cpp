@@ -1,5 +1,5 @@
-#ifndef SCENE_H
-#define SCENE_H
+#ifndef GAMESCENE_H
+#define GAMESCENE_H
 
 #include <QObject>
 #include <QGraphicsScene>
@@ -8,11 +8,11 @@
 #include <QTimer>
 #include <QElapsedTimer>
 
-class Scene : public QGraphicsScene
+class GameScene : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    Scene(QObject* parent = nullptr);
+    GameScene(QObject* parent = nullptr);
     void start();
     void stop();
 private:
@@ -32,4 +32,4 @@ signals:
     void goToMenuActivated();
 };
 
-#endif // SCENE_H
+#endif // GAMESCENE_H
