@@ -51,6 +51,8 @@ public:
     void addScore(int val);
 
     bool m_gameOver;
+
+    void reset();
 };
 
 #endif // GAME_H

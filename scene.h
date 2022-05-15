@@ -13,6 +13,8 @@ class Scene : public QGraphicsScene
     Q_OBJECT
 public:
     Scene(QObject* parent = nullptr);
+    void start();
+    void stop();
 private:
     Game game;
     QGraphicsPixmapItem* m_background, *m_tiles, *m_frame;
@@ -26,7 +28,8 @@ protected:
     virtual void keyReleaseEvent(QKeyEvent *event) override;
 private slots:
     void update();
-
+signals:
+    void goToMenuActivated();
 };
 
 #endif // SCENE_H

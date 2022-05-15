@@ -61,6 +61,17 @@ void MenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
             )
     {
         qDebug() << "Options clicked";
+        emit optionsClicked();
+    }
+
+    if(
+            event->scenePos().x() > m_quitItem->x() && event->scenePos().x() < (m_quitItem->x() + m_quitItem->boundingRect().width()) &&
+            event->scenePos().y() > m_quitItem->y() && event->scenePos().y() < (m_quitItem->y() + m_quitItem->boundingRect().height())
+
+            )
+    {
+        qDebug() << "Quit clicked";
+        emit quitClicked();
     }
     QGraphicsScene::mousePressEvent(event);
 }

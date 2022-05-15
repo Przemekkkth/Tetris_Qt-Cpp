@@ -14,51 +14,61 @@ Scene::Scene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(100
     //m_tiles->update()
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Scene::update);
+    //timer->start(timePerFrame);
+}
+
+void Scene::start()
+{
+    game.reset();
     timer->start(timePerFrame);
+}
+
+void Scene::stop()
+{
+    timer->stop();
 }
 
 void Scene::keyPressEvent(QKeyEvent *event)
 {
     if( !event->isAutoRepeat() )
     {
-        //qDebug() << "Pressed key: " << event->key();
-        switch(event->key())
+      switch(event->key())
         {
-        case Qt::Key_Left:
-        case Qt::Key_A:
-            game.m_dx = -1;
-            break;
+            case Qt::Key_Left:
+            case Qt::Key_A:
+                game.m_dx = -1;
+                break;
 
-        case Qt::Key_Right:
-        case Qt::Key_D:
-            game.m_dx = 1;
-            break;
+            case Qt::Key_Right:
+            case Qt::Key_D:
+                game.m_dx = 1;
+                break;
 
-        case Qt::Key_Up:
-        case Qt::Key_W:
-            game.m_rotate = true;
-            break;
+            case Qt::Key_Up:
+            case Qt::Key_W:
+                game.m_rotate = true;
+                break;
 
-        case Qt::Key_Down:
-        case Qt::Key_S:
-            game.m_delay = Game::SPEED_UP;
+            case Qt::Key_Down:
+            case Qt::Key_S:
+                game.m_delay = Game::SPEED_UP;
+                break;
+            case Qt::Key_P:
+                if(game.m_state == Game::State::Active)
+                {
+                    game.m_state = Game::State::Paused;
+                }
+                else if( game.m_state == Game::State::Paused )
+                {
+                    game.m_state = Game::State::Active;
+                }
+                break;
+            case Qt::Key_Backspace:
+                emit goToMenuActivated();
             break;
-        case Qt::Key_P:
-            if(game.m_state == Game::State::Active)
-            {
-                game.m_state = Game::State::Paused;
-            }
-            else if( game.m_state == Game::State::Paused )
-            {
-                game.m_state = Game::State::Active;
-            }
-            break;
-
-        default:
-            break;
+            default:
+                break;
         }
-
-
     }
 
     QGraphicsScene::keyPressEvent(event);

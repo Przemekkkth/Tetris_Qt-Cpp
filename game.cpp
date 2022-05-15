@@ -138,3 +138,37 @@ void Game::addScore(int val)
 {
     m_score += val;
 }
+
+void Game::reset()
+{
+    m_score = 0;
+    m_gameOver = false;
+
+    for(int i = 0; i < BOARD_HEIGHT; ++i)
+    {
+        for(int j = 0; j < BOARD_WIDTH; ++j)
+        {
+            m_field[i][j] = 0;
+        }
+    }
+    //set zero for points
+    for(int i = 0; i < 4; ++i)
+    {
+        m_a[i].x = 0;
+        m_a[i].y = 0;
+        m_b[i].x = 0;
+        m_b[i].y = 0;
+    }
+
+    //set init figure
+    srand(time(0));
+    m_colorNum = (rand() % (Game::COUNT_OF_COLORS - 1)) + 1;
+    int n = rand() % Game::COUNT_OF_FIGURES;
+    for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
+    {
+        m_a[i].x = (m_figures[n][i] % 2) + BOARD_WIDTH/2-1;
+        m_a[i].y = m_figures[n][i] / 2;
+    }
+
+    m_timer = 0.0f;
+}

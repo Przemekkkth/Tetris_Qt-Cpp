@@ -2,6 +2,8 @@
 #define VIEW_H
 
 #include <QGraphicsView>
+class Scene;
+class MenuScene;
 
 class View : public QGraphicsView
 {
@@ -11,6 +13,17 @@ public:
 
 signals:
 
+private:
+    void createConnections();
+
+    Scene* m_gameScene;
+    MenuScene* m_menuScene;
+
+private slots:
+    void start();
+    void options();
+    void quit();
+    void menu();
 };
 
 #endif // VIEW_H
