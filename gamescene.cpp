@@ -1,6 +1,7 @@
 #include "gamescene.h"
 #include <QKeyEvent>
 #include <QDebug>
+#include <QSoundEffect>
 
 GameScene::GameScene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(1000.0f/60.0f)
 {
@@ -8,13 +9,14 @@ GameScene::GameScene(QObject *parent) : QGraphicsScene(parent), game(), timePerF
     srand(time(0));
 
     m_frame = new QGraphicsPixmapItem(game.m_frame);
-
     m_tiles = new QGraphicsPixmapItem(game.m_tile);
 
-    //m_tiles->update()
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &GameScene::update);
-    //timer->start(timePerFrame);
+
+    m_hitSFX = new QSoundEffect(this);
+    m_hitSFX->setSource(QUrl("qrc:/music/hit.wav"));
+    m_hitSFX->setVolume(1.0f);
 }
 
 void GameScene::start()
@@ -207,6 +209,7 @@ void GameScene::update()
         else
         {
             game.addScore(1);
+            m_hitSFX->play();
             //qDebug() << "Score: " << game.m_score;
         }
     }

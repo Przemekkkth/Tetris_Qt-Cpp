@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QElapsedTimer>
 
+class QSoundEffect;
 class GameScene : public QGraphicsScene
 {
     Q_OBJECT
@@ -22,6 +23,7 @@ private:
     const float timePerFrame;
     QTimer *timer;
 
+    QSoundEffect* m_hitSFX;
     // QGraphicsScene interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
