@@ -23,6 +23,7 @@ void GameScene::start()
 {
     game.reset();
     timer->start(timePerFrame);
+
 }
 
 void GameScene::stop()

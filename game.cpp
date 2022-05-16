@@ -171,4 +171,5 @@ void Game::reset()
     }
 
     m_timer = 0.0f;
+    m_state = State::Active;
 }
