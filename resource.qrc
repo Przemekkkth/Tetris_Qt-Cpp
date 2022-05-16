@@ -18,5 +18,7 @@
         <file>images/back_description.png</file>
         <file>images/rotate_description.png</file>
         <file>images/speedup_description.png</file>
+        <file>music/hit.wav</file>
+        <file>music/background.wav</file>
     </qresource>
 </RCC>
