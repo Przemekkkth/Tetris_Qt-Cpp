@@ -14,8 +14,8 @@ View::View(QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    QCursor _cursor = QCursor( QPixmap(":/images/cursor.png").scaled(16,16) );
-    setCursor(_cursor);
+    m_cursor = QCursor( QPixmap(":/images/cursor.png").scaled(16,16) );
+    setCursor(m_cursor);
 
     createConnections();
 }
@@ -35,6 +35,7 @@ void View::start()
 {
     setScene(m_gameScene);
     m_gameScene->start();
+    setCursor(QCursor(Qt::BlankCursor));
 }
 
 void View::options()
@@ -50,4 +51,5 @@ void View::quit()
 void View::menu()
 {
     setScene(m_menuScene);
+    setCursor(m_cursor);
 }
