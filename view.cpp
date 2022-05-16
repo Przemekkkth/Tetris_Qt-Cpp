@@ -4,6 +4,7 @@
 #include "gamescene.h"
 #include "settingsscene.h"
 #include <QApplication>
+#include <QCursor>
 
 View::View(QWidget *parent)
     : QGraphicsView(parent), m_gameScene(new GameScene()), m_menuScene(new MenuScene()), m_settingsScene(new SettingsScene())
@@ -12,6 +13,9 @@ View::View(QWidget *parent)
     resize(Game::RESOLUTION.width()+2, Game::RESOLUTION.height()+2);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    QCursor _cursor = QCursor( QPixmap(":/images/cursor.png").scaled(16,16) );
+    setCursor(_cursor);
 
     createConnections();
 }
