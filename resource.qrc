@@ -11,5 +11,12 @@
         <file>images/quit_text.png</file>
         <file>images/start_text.png</file>
         <file>images/options_text.png</file>
+        <file>images/back_text.png</file>
+        <file>images/left_description.png</file>
+        <file>images/pause_description.png</file>
+        <file>images/right_description.png</file>
+        <file>images/back_description.png</file>
+        <file>images/rotate_description.png</file>
+        <file>images/speedup_description.png</file>
     </qresource>
 </RCC>
