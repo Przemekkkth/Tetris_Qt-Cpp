@@ -4,6 +4,7 @@
 #include <QGraphicsView>
 class GameScene;
 class MenuScene;
+class SettingsScene;
 
 class View : public QGraphicsView
 {
@@ -18,6 +19,7 @@ private:
 
     GameScene* m_gameScene;
     MenuScene* m_menuScene;
+    SettingsScene* m_settingsScene;
 
 private slots:
     void start();

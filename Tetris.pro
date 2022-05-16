@@ -13,6 +13,7 @@ SOURCES += \
     gamescene.cpp \
     main.cpp \
     menuscene.cpp \
+    settingsscene.cpp \
     view.cpp
 
 HEADERS += \
@@ -20,6 +21,7 @@ HEADERS += \
     gamescene.h \
     menuscene.h \
     point.h \
+    settingsscene.h \
     view.h
 
 # Default rules for deployment.
