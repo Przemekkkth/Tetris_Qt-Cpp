@@ -25,8 +25,25 @@ SettingsScene::SettingsScene(QObject *parent)
     addItem(m_backspaceItem);
     m_backTextItem = new QGraphicsPixmapItem(m_backTextPixmap);
     addItem(m_backTextItem);
+    m_statusMusicItem = new QGraphicsPixmapItem(m_muteTextPixmap);
+    addItem(m_statusMusicItem);
 
     createItemPos();
+}
+
+void SettingsScene::setMusicInfo(bool muted)
+{
+    if(!muted)
+    {
+        m_statusMusicItem->setPixmap(m_muteTextPixmap);
+        m_statusMusicItem->setPos(48, 300);
+    }
+    else
+    {
+        m_statusMusicItem->setPixmap(m_unmuteTextPixmap);
+        m_statusMusicItem->setPos(32, 300);
+    }
+    update();
 }
 
 void SettingsScene::loadPixmaps()
@@ -65,6 +82,16 @@ void SettingsScene::loadPixmaps()
     {
         qDebug() << "Failed to load: " << ":/images/back_text.png";
     }
+
+    if( !m_muteTextPixmap.load(":/images/mute_text.png") )
+    {
+        qDebug() << "Failed to load: " << ":/images/mute_text.png";
+    }
+
+    if( !m_unmuteTextPixmap.load(":/images/unmute_text.png") )
+    {
+        qDebug() << "Failed to load: " << ":/images/unmute_text.png";
+    }
 }
 
 void SettingsScene::createItemPos()
@@ -81,6 +108,8 @@ void SettingsScene::createItemPos()
     m_pauseItem->setPos(48,200);
     //w:224px
     m_backspaceItem->setPos(48,250);
+    //w:224
+    m_statusMusicItem->setPos(48, 300);
     //w:128px
     m_backTextItem->setPos(96, 400);
 }

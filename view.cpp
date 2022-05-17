@@ -72,6 +72,7 @@ void View::keyPressEvent(QKeyEvent *event)
                     bool isMuted = !m_backgroundMusic->isMuted();
                     m_backgroundMusic->setMuted(isMuted);
                     m_gameScene->setMuted(isMuted);
+                    m_settingsScene->setMusicInfo(isMuted);
                 break;
         }
     }
