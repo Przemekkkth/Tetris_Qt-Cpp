@@ -24,7 +24,7 @@ private:
     QGraphicsPixmapItem* m_optionsItem;
     QGraphicsPixmapItem* m_quitItem;
     void createItemPos();
-
+    void renderScene();
 
     // QGraphicsScene interface
 protected:

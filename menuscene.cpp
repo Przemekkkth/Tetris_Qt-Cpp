@@ -2,6 +2,8 @@
 #include "game.h"
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
+#include <QDir>
+#include <QPainter>
 
 MenuScene::MenuScene(QObject *parent)
     : QGraphicsScene{parent}
@@ -40,6 +42,18 @@ void MenuScene::createItemPos()
     m_startItem->setPos(80, 200);
     m_optionsItem->setPos(48, 300);
     m_quitItem->setPos(96, 400);
+}
+
+void MenuScene::renderScene()
+{
+    QString fileName = QDir::currentPath() + QDir::separator() + "game_menu.png";
+    QRect rect = sceneRect().toAlignedRect();
+    QImage image(rect.size(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter(&image);
+    render(&painter);
+    image.save(fileName);
+    qDebug() << "saved " << fileName;
 }
 
 void MenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -87,6 +101,9 @@ void MenuScene::keyPressEvent(QKeyEvent *event)
             break;
         case Qt::Key_O:
             emit optionsClicked();
+            break;
+        case Qt::Key_Y:
+            renderScene();
             break;
         }
     }

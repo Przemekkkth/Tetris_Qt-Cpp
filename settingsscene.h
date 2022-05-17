@@ -35,6 +35,7 @@ private:
 
     void loadPixmaps();
     void createItemPos();
+    void renderScene();
 
     // QGraphicsScene interface
 protected:

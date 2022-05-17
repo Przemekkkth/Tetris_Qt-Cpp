@@ -18,6 +18,7 @@ public:
     void stop();
     void setMuted(bool val);
 private:
+    void renderScene();
     Game game;
     QGraphicsPixmapItem* m_background, *m_tiles, *m_frame;
 

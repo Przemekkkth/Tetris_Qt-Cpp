@@ -3,6 +3,8 @@
 #include <QDebug>
 #include <QKeyEvent>
 #include <QGraphicsSceneMouseEvent>
+#include <QDir>
+#include <QPainter>
 
 SettingsScene::SettingsScene(QObject *parent)
     : QGraphicsScene{parent}
@@ -114,17 +116,32 @@ void SettingsScene::createItemPos()
     m_backTextItem->setPos(96, 400);
 }
 
+void SettingsScene::renderScene()
+{
+    QString fileName = QDir::currentPath() + QDir::separator() + "settings_scene.png";
+    QRect rect = sceneRect().toAlignedRect();
+    QImage image(rect.size(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter(&image);
+    render(&painter);
+    image.save(fileName);
+    qDebug() << "saved " << fileName;
+}
+
 void SettingsScene::keyPressEvent(QKeyEvent *event)
 {
     if( !event->isAutoRepeat() )
     {
-      switch(event->key())
+        switch(event->key())
         {
-            case Qt::Key_Backspace:
-                emit goToMenuActivated();
+        case Qt::Key_Backspace:
+            emit goToMenuActivated();
             break;
-            default:
-                break;
+        default:
+            break;
+        case Qt::Key_Y:
+            renderScene();
+            break;
         }
     }
 

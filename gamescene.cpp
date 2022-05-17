@@ -2,6 +2,8 @@
 #include <QKeyEvent>
 #include <QDebug>
 #include <QSoundEffect>
+#include <QDir>
+#include <QPainter>
 
 GameScene::GameScene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(1000.0f/60.0f), m_isMuted(false)
 {
@@ -34,6 +36,18 @@ void GameScene::stop()
 void GameScene::setMuted(bool val)
 {
     m_isMuted = val;
+}
+
+void GameScene::renderScene()
+{
+    QString fileName = QDir::currentPath() + QDir::separator() + "game_scene.png";
+    QRect rect = sceneRect().toAlignedRect();
+    QImage image(rect.size(), QImage::Format_ARGB32);
+    image.fill(Qt::transparent);
+    QPainter painter(&image);
+    render(&painter);
+    image.save(fileName);
+    qDebug() << "saved " << fileName;
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)
@@ -92,6 +106,9 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             {
                 game.reset();
             }
+            break;
+        case Qt::Key_Y:
+            renderScene();
             break;
         default:
             break;
