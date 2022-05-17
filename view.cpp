@@ -66,14 +66,20 @@ void View::keyPressEvent(QKeyEvent *event)
 {
     if( !event->isAutoRepeat() )
     {
-      switch(event->key())
+        switch(event->key())
         {
-            case Qt::Key_M:
-                    bool isMuted = !m_backgroundMusic->isMuted();
-                    m_backgroundMusic->setMuted(isMuted);
-                    m_gameScene->setMuted(isMuted);
-                    m_settingsScene->setMusicInfo(isMuted);
-                break;
+        case Qt::Key_M:
+        {
+            bool isMuted = !m_backgroundMusic->isMuted();
+            m_backgroundMusic->setMuted(isMuted);
+            m_gameScene->setMuted(isMuted);
+            m_settingsScene->setMusicInfo(isMuted);
+            break;
+        }
+        case Qt::Key_Escape:
+            QApplication::instance()->quit();
+            break;
+
         }
     }
     QGraphicsView::keyPressEvent(event);

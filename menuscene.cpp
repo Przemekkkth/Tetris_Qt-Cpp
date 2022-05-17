@@ -1,6 +1,7 @@
 #include "menuscene.h"
 #include "game.h"
 #include <QGraphicsSceneMouseEvent>
+#include <QKeyEvent>
 
 MenuScene::MenuScene(QObject *parent)
     : QGraphicsScene{parent}
@@ -43,7 +44,6 @@ void MenuScene::createItemPos()
 
 void MenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    qDebug() << event->scenePos();
     if(
             event->scenePos().x() > m_startItem->x() && event->scenePos().x() < (m_startItem->x() + m_startItem->boundingRect().width()) &&
             event->scenePos().y() > m_startItem->y() && event->scenePos().y() < (m_startItem->y() + m_startItem->boundingRect().height())
@@ -78,5 +78,18 @@ void MenuScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void MenuScene::keyPressEvent(QKeyEvent *event)
 {
+    if( !event->isAutoRepeat() )
+    {
+        switch(event->key())
+        {
+        case Qt::Key_S:
+            emit startClicked();
+            break;
+        case Qt::Key_O:
+            emit optionsClicked();
+            break;
+        }
+    }
+
     QGraphicsScene::keyPressEvent(event);
 }
