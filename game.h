@@ -39,6 +39,7 @@ public:
     QPixmap m_scorePixmap;
     QPixmap m_numbersPixmap;
     QPixmap m_gameOverBackground;
+    QPixmap m_restartTextPixmap;
 
     enum class State{
         Active, Paused, Game_Over

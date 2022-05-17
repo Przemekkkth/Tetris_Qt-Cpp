@@ -22,5 +22,6 @@
         <file>music/background.wav</file>
         <file>images/mute_text.png</file>
         <file>images/unmute_text.png</file>
+        <file>images/restart_text.png</file>
     </qresource>
 </RCC>

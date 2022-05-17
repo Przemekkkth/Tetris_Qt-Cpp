@@ -116,6 +116,11 @@ Game::Game()
     {
         qDebug() << "Failed to load: " << ":/images/bg_gameover.png";
     }
+
+    if( !m_restartTextPixmap.load(":/images/restart_text.png"))
+    {
+        qDebug() << "Failed to load: " << ":/images/restart_text.png";
+    }
 }
 
 bool Game::check()

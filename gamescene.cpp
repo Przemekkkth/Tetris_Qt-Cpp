@@ -40,42 +40,48 @@ void GameScene::keyPressEvent(QKeyEvent *event)
 {
     if( !event->isAutoRepeat() )
     {
-      switch(event->key())
+        switch(event->key())
         {
-            case Qt::Key_Left:
-            case Qt::Key_A:
-                game.m_dx = -1;
-                break;
-
-            case Qt::Key_Right:
-            case Qt::Key_D:
-                game.m_dx = 1;
-                break;
-
-            case Qt::Key_Up:
-            case Qt::Key_W:
-                game.m_rotate = true;
-                break;
-
-            case Qt::Key_Down:
-            case Qt::Key_S:
-                game.m_delay = Game::SPEED_UP;
-                break;
-            case Qt::Key_P:
-                if(game.m_state == Game::State::Active)
-                {
-                    game.m_state = Game::State::Paused;
-                }
-                else if( game.m_state == Game::State::Paused )
-                {
-                    game.m_state = Game::State::Active;
-                }
-                break;
-            case Qt::Key_Backspace:
-                emit goToMenuActivated();
+        case Qt::Key_Left:
+        case Qt::Key_A:
+            game.m_dx = -1;
             break;
-            default:
-                break;
+
+        case Qt::Key_Right:
+        case Qt::Key_D:
+            game.m_dx = 1;
+            break;
+
+        case Qt::Key_Up:
+        case Qt::Key_W:
+            game.m_rotate = true;
+            break;
+
+        case Qt::Key_Down:
+        case Qt::Key_S:
+            game.m_delay = Game::SPEED_UP;
+            break;
+        case Qt::Key_P:
+            if(game.m_state == Game::State::Active)
+            {
+                game.m_state = Game::State::Paused;
+            }
+            else if( game.m_state == Game::State::Paused )
+            {
+                game.m_state = Game::State::Active;
+            }
+            break;
+        case Qt::Key_Backspace:
+            emit goToMenuActivated();
+            break;
+        case Qt::Key_R:
+            if(game.m_gameOver)
+            {
+                game.reset();
+            }
+            break;
+        default:
+            break;
         }
     }
 
@@ -115,7 +121,7 @@ void GameScene::update()
 {
     if(game.m_state == Game::State::Active)
     {
-       game.m_timer += (timePerFrame);
+        game.m_timer += (timePerFrame);
     }
     clear();
 
@@ -295,5 +301,9 @@ void GameScene::update()
         game.m_state = Game::State::Game_Over;
         QGraphicsPixmapItem* item = new QGraphicsPixmapItem(game.m_gameOverBackground);
         addItem(item);
+
+        QGraphicsPixmapItem* restartTextItem = new QGraphicsPixmapItem(game.m_restartTextPixmap);
+        addItem(restartTextItem);
+        restartTextItem->setPos(16, 350);
     }
 }
