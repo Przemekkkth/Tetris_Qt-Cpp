@@ -16,6 +16,7 @@ public:
     GameScene(QObject* parent = nullptr);
     void start();
     void stop();
+    void setMuted(bool val);
 private:
     Game game;
     QGraphicsPixmapItem* m_background, *m_tiles, *m_frame;
@@ -24,6 +25,7 @@ private:
     QTimer *timer;
 
     QSoundEffect* m_hitSFX;
+    bool m_isMuted;
     // QGraphicsScene interface
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;

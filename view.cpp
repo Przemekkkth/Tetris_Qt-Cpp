@@ -6,6 +6,7 @@
 #include <QApplication>
 #include <QCursor>
 #include <QSoundEffect>
+#include <QKeyEvent>
 
 View::View(QWidget *parent)
     : QGraphicsView(parent), m_gameScene(new GameScene()), m_menuScene(new MenuScene()), m_settingsScene(new SettingsScene())
@@ -23,7 +24,6 @@ View::View(QWidget *parent)
     m_backgroundMusic->setLoopCount(QSoundEffect::Infinite);
     m_backgroundMusic->setVolume(0.5f);
     m_backgroundMusic->play();
-
 
     createConnections();
 }
@@ -60,4 +60,20 @@ void View::menu()
 {
     setScene(m_menuScene);
     setCursor(m_cursor);
+}
+
+void View::keyPressEvent(QKeyEvent *event)
+{
+    if( !event->isAutoRepeat() )
+    {
+      switch(event->key())
+        {
+            case Qt::Key_M:
+                    bool isMuted = !m_backgroundMusic->isMuted();
+                    m_backgroundMusic->setMuted(isMuted);
+                    m_gameScene->setMuted(isMuted);
+                break;
+        }
+    }
+    QGraphicsView::keyPressEvent(event);
 }

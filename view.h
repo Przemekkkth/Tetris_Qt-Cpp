@@ -30,6 +30,10 @@ private slots:
     void options();
     void quit();
     void menu();
+
+    // QWidget interface
+protected:
+    virtual void keyPressEvent(QKeyEvent *event) override;
 };
 
 #endif // VIEW_H

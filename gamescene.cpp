@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QSoundEffect>
 
-GameScene::GameScene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(1000.0f/60.0f)
+GameScene::GameScene(QObject *parent) : QGraphicsScene(parent), game(), timePerFrame(1000.0f/60.0f), m_isMuted(false)
 {
     setSceneRect(0,0, Game::RESOLUTION.width(), Game::RESOLUTION.height() );
     srand(time(0));
@@ -29,6 +29,11 @@ void GameScene::start()
 void GameScene::stop()
 {
     timer->stop();
+}
+
+void GameScene::setMuted(bool val)
+{
+    m_isMuted = val;
 }
 
 void GameScene::keyPressEvent(QKeyEvent *event)
@@ -210,8 +215,8 @@ void GameScene::update()
         else
         {
             game.addScore(1);
+            m_hitSFX->setMuted(m_isMuted);
             m_hitSFX->play();
-            //qDebug() << "Score: " << game.m_score;
         }
     }
 
