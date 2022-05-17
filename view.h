@@ -6,6 +6,7 @@
 class GameScene;
 class MenuScene;
 class SettingsScene;
+class QSoundEffect;
 
 class View : public QGraphicsView
 {
@@ -22,6 +23,8 @@ private:
     MenuScene* m_menuScene;
     SettingsScene* m_settingsScene;
     QCursor m_cursor;
+
+    QSoundEffect* m_backgroundMusic;
 private slots:
     void start();
     void options();

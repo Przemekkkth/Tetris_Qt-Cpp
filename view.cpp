@@ -5,6 +5,7 @@
 #include "settingsscene.h"
 #include <QApplication>
 #include <QCursor>
+#include <QSoundEffect>
 
 View::View(QWidget *parent)
     : QGraphicsView(parent), m_gameScene(new GameScene()), m_menuScene(new MenuScene()), m_settingsScene(new SettingsScene())
@@ -16,6 +17,13 @@ View::View(QWidget *parent)
 
     m_cursor = QCursor( QPixmap(":/images/cursor.png").scaled(16,16) );
     setCursor(m_cursor);
+
+    m_backgroundMusic = new QSoundEffect(this);
+    m_backgroundMusic->setSource(QUrl("qrc:/music/background.wav"));
+    m_backgroundMusic->setLoopCount(QSoundEffect::Infinite);
+    m_backgroundMusic->setVolume(0.5f);
+    m_backgroundMusic->play();
+
 
     createConnections();
 }

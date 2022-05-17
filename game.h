@@ -19,7 +19,6 @@ public:
     static QSize BLOCK_SIZE;
     static QSize RESOLUTION;
 
-
     int m_field[20][10];
 
     Point m_a[4], m_b[4];
