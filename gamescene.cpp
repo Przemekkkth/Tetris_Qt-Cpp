@@ -44,22 +44,35 @@ void GameScene::keyPressEvent(QKeyEvent *event)
         {
         case Qt::Key_Left:
         case Qt::Key_A:
-            game.m_dx = -1;
+            if(game.m_state == Game::State::Active)
+            {
+                game.m_dx = -1;
+            }
             break;
 
         case Qt::Key_Right:
         case Qt::Key_D:
-            game.m_dx = 1;
+            if(game.m_state == Game::State::Active)
+            {
+                game.m_dx = 1;
+            }
             break;
 
         case Qt::Key_Up:
         case Qt::Key_W:
-            game.m_rotate = true;
+            if(game.m_state == Game::State::Active)
+            {
+                game.m_rotate = true;
+            }
             break;
 
         case Qt::Key_Down:
         case Qt::Key_S:
-            game.m_delay = Game::SPEED_UP;
+            if(game.m_state == Game::State::Active)
+            {
+                game.m_delay = Game::SPEED_UP;
+            }
+
             break;
         case Qt::Key_P:
             if(game.m_state == Game::State::Active)
