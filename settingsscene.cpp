@@ -140,7 +140,7 @@ void SettingsScene::keyPressEvent(QKeyEvent *event)
         default:
             break;
         case Qt::Key_Y:
-            renderScene();
+            //renderScene(); //uncomment to make screnshot
             break;
         }
     }

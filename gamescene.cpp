@@ -108,7 +108,7 @@ void GameScene::keyPressEvent(QKeyEvent *event)
             }
             break;
         case Qt::Key_Y:
-            renderScene();
+            //renderScene(); //uncomment to make screnshot
             break;
         default:
             break;

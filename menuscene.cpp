@@ -110,7 +110,7 @@ void MenuScene::keyPressEvent(QKeyEvent *event)
             emit optionsClicked();
             break;
         case Qt::Key_Y:
-            renderScene();
+            //renderScene(); //uncomment to make screnshot
             break;
         }
     }
