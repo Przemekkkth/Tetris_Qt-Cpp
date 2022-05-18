@@ -18,11 +18,13 @@ private:
     QPixmap m_startTextPixmap;
     QPixmap m_optionsTextPixmap;
     QPixmap m_quitTextPixmap;
+    QPixmap m_tetrisTitlePixmap;
     void loadPixmaps();
 
     QGraphicsPixmapItem* m_startItem;
     QGraphicsPixmapItem* m_optionsItem;
     QGraphicsPixmapItem* m_quitItem;
+    QGraphicsPixmapItem* m_tetrisTitleItem;
     void createItemPos();
     void renderScene();
 

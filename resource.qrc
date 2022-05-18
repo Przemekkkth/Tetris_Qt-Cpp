@@ -23,5 +23,6 @@
         <file>images/mute_text.png</file>
         <file>images/unmute_text.png</file>
         <file>images/restart_text.png</file>
+        <file>images/tetris_title.png</file>
     </qresource>
 </RCC>

@@ -17,6 +17,8 @@ MenuScene::MenuScene(QObject *parent)
     addItem(m_optionsItem);
     m_quitItem = new QGraphicsPixmapItem(m_quitTextPixmap);
     addItem(m_quitItem);
+    m_tetrisTitleItem = new QGraphicsPixmapItem(m_tetrisTitlePixmap.scaled(320, m_tetrisTitlePixmap.height()));
+    addItem(m_tetrisTitleItem);
 
     createItemPos();
 }
@@ -35,6 +37,10 @@ void MenuScene::loadPixmaps()
     {
         qDebug() << "Failed to load: " << ":/images/quit_text.png";
     }
+    if( !m_tetrisTitlePixmap.load(":/images/tetris_title.png") )
+    {
+        qDebug() << "Failed to load: " << ":/images/tetris_title.png";
+    }
 }
 
 void MenuScene::createItemPos()
@@ -42,6 +48,7 @@ void MenuScene::createItemPos()
     m_startItem->setPos(80, 200);
     m_optionsItem->setPos(48, 300);
     m_quitItem->setPos(96, 400);
+    m_tetrisTitleItem->setPos(8,64);
 }
 
 void MenuScene::renderScene()
