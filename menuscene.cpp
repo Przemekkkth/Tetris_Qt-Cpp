@@ -8,7 +8,7 @@
 MenuScene::MenuScene(QObject *parent)
     : QGraphicsScene{parent}
 {
-    setBackgroundBrush(QBrush(QColor(Qt::white)));
+    setBackgroundBrush(QBrush(QColor(153, 153, 102, 200)));
     setSceneRect(0, 0, Game::RESOLUTION.width(), Game::RESOLUTION.height());
     loadPixmaps();
     m_startItem = new QGraphicsPixmapItem(m_startTextPixmap);
