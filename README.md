@@ -26,3 +26,4 @@ qmake && make
 ## Addons
 * [Qt] (https://www.qt.io/) - Cross-Platform software for embedded & desktop
 * [SFX] (https://www.leshylabs.com/apps/sfMaker/)) - sound effects
+* [Video](https://youtu.be/CyErbZoVSvc) - gameplay
