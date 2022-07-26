@@ -24,5 +24,6 @@
         <file>images/unmute_text.png</file>
         <file>images/restart_text.png</file>
         <file>images/tetris_title.png</file>
+        <file>piece_conf.txt</file>
     </qresource>
 </RCC>

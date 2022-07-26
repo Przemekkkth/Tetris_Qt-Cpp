@@ -40,13 +40,13 @@ Game::Game()
     m_figures[0][2] = 5;
     m_figures[0][3] = 7;
 
-    //Z
+    //S
     m_figures[1][0] = 2;
     m_figures[1][1] = 4;
     m_figures[1][2] = 5;
     m_figures[1][3] = 7;
 
-    //S
+    //Z
     m_figures[2][0] = 3;
     m_figures[2][1] = 5;
     m_figures[2][2] = 4;
