@@ -23,7 +23,7 @@ public:
 
     Point m_a[4], m_b[4];
 
-    int m_figures[7][4];
+    int m_figures[2][4];
 
     bool check();
 

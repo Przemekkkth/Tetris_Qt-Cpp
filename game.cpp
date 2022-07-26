@@ -8,8 +8,8 @@ const float Game::SPEED = 500.0f;//in milisecond
 const float Game::SPEED_UP = 100.0f;//in milisecond
 
 const int Game::COUNT_OF_COLORS = 10;
-const int Game::COUNT_OF_FIGURES = 7;
-const int Game::COUNT_OF_BLOCKS = 4;
+const int Game::COUNT_OF_FIGURES = 2;
+const int Game::COUNT_OF_BLOCKS = 1;
 
 QSize Game::BLOCK_SIZE = QSize(18, 18);
 QSize Game::RESOLUTION = QSize(320, 480);
@@ -34,48 +34,12 @@ Game::Game()
         m_b[i].y = 0;
     }
 
-    //I
-    m_figures[0][0] = 1;
-    m_figures[0][1] = 3;
-    m_figures[0][2] = 5;
-    m_figures[0][3] = 7;
-
-    //S
-    m_figures[1][0] = 2;
-    m_figures[1][1] = 4;
-    m_figures[1][2] = 5;
-    m_figures[1][3] = 7;
-
-    //Z
-    m_figures[2][0] = 3;
-    m_figures[2][1] = 5;
-    m_figures[2][2] = 4;
-    m_figures[2][3] = 6;
-
-    //T
-    m_figures[3][0] = 3;
-    m_figures[3][1] = 5;
-    m_figures[3][2] = 4;
-    m_figures[3][3] = 7;
-
-    //L
-    m_figures[4][0] = 2;
-    m_figures[4][1] = 3;
-    m_figures[4][2] = 5;
-    m_figures[4][3] = 7;
-
-    //J
-    m_figures[5][0] = 3;
-    m_figures[5][1] = 5;
-    m_figures[5][2] = 7;
-    m_figures[5][3] = 6;
+    //left dot
+    m_figures[0][0] = 0;
 
 
-    //O
-    m_figures[6][0] = 2;
-    m_figures[6][1] = 3;
-    m_figures[6][2] = 4;
-    m_figures[6][3] = 5;
+    //right dot
+    m_figures[1][0] = 1;
 
     //set init figure
     srand(time(0));
