@@ -27,7 +27,18 @@ private:
 
     QSoundEffect* m_hitSFX;
     bool m_isMuted;
-    // QGraphicsScene interface
+
+    void drawScore();
+    void drawGameState();
+    
+    void drawActiveFigure();
+
+    void moveFigure();
+
+    void drawBackground();
+
+    void rotateFigure();
+
 protected:
     virtual void keyPressEvent(QKeyEvent *event) override;
     virtual void keyReleaseEvent(QKeyEvent *event) override;

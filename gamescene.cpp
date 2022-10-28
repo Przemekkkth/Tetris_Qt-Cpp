@@ -147,22 +147,83 @@ void GameScene::keyReleaseEvent(QKeyEvent *event)
     QGraphicsScene::keyReleaseEvent(event);
 }
 
-void GameScene::update()
+void GameScene::drawScore()
 {
-    if(game.m_state == Game::State::Active)
+    QGraphicsPixmapItem* scorePixmapItem = new QGraphicsPixmapItem(game.m_scorePixmap.scaled(130,32));
+    addItem(scorePixmapItem);
+    scorePixmapItem->moveBy(190,270);
+    QString scoreText = QString::number(game.m_score);
+    int unityPartVal = 0;
+    int decimalPartValue = 0;
+    int hendredthPartValue = 0;
+
+    if(scoreText.length() == 1) // 0 - 9
     {
-        game.m_timer += (timePerFrame);
+        unityPartVal = scoreText.toInt();
+        decimalPartValue = 0;
+        hendredthPartValue = 0;
     }
-    clear();
+    else if(scoreText.length() == 2) // 10 - 99
+    {
+        unityPartVal = scoreText.last(1).toInt();
+        decimalPartValue = scoreText.first(1).toInt();
+        hendredthPartValue = 0;
+    }
+    else if(scoreText.length() == 3) // 100 - 999
+    {
+        unityPartVal = scoreText.last(1).toInt();
+        hendredthPartValue = scoreText.first(1).toInt();
+        QString copyVal = scoreText;
+        copyVal.chop(1);
+        decimalPartValue = copyVal.last(1).toInt();
+    }
 
-    m_background = new QGraphicsPixmapItem(game.m_background.scaled(sceneRect().width(), sceneRect().height()));
-    addItem(m_background);
+    QGraphicsPixmapItem* unityPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(unityPartVal*32, 0, 32, 32));
+    unityPartScoreItem->moveBy(Game::RESOLUTION.width()-32, scorePixmapItem->y()+32);
+    addItem(unityPartScoreItem);
 
-    m_frame = new QGraphicsPixmapItem(game.m_frame);
-    addItem(m_frame);
-    m_frame->moveBy(15, 31);
+    QGraphicsPixmapItem* decimalPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(decimalPartValue*32, 0, 32, 32));
+    decimalPartScoreItem->moveBy(Game::RESOLUTION.width()-2*32, scorePixmapItem->y()+32);
+    addItem(decimalPartScoreItem);
 
-    //// <- Move -> ///
+    QGraphicsPixmapItem* hundrethPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(hendredthPartValue*32, 0, 32, 32));
+    hundrethPartScoreItem->moveBy(Game::RESOLUTION.width()-3*32, scorePixmapItem->y()+32);
+    addItem(hundrethPartScoreItem);
+}
+
+void GameScene::drawGameState()
+{
+    if(game.m_state == Game::State::Paused)
+    {
+        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(game.m_pauseBackground);
+        addItem(item);
+    }
+    if(game.m_gameOver)
+    {
+        game.m_state = Game::State::Game_Over;
+        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(game.m_gameOverBackground);
+        addItem(item);
+
+        QGraphicsPixmapItem* restartTextItem = new QGraphicsPixmapItem(game.m_restartTextPixmap);
+        addItem(restartTextItem);
+        restartTextItem->setPos(16, 350);
+    }
+}
+
+void GameScene::drawActiveFigure()
+{
+    for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
+    {
+        QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(game.m_tile.copy(game.m_colorNum * Game::BLOCK_SIZE.width(), 0,
+                                                                                   Game::BLOCK_SIZE.width(), Game::BLOCK_SIZE.height()));
+        addItem(pixmapItem);
+        pixmapItem->setPos(game.m_a[i].x * Game::BLOCK_SIZE.width(), game.m_a[i].y * Game::BLOCK_SIZE.height());
+        pixmapItem->moveBy(m_frame->pos().x(), m_frame->pos().y());
+    }
+}
+
+void GameScene::moveFigure()
+{
     for (int i = 0; i < Game::COUNT_OF_BLOCKS ;i++)
     {
         game.m_b[i]= game.m_a[i];
@@ -176,8 +237,20 @@ void GameScene::update()
             game.m_a[i] = game.m_b[i];
         }
     }
+}
 
-    //////Rotate//////
+void GameScene::drawBackground()
+{
+    m_background = new QGraphicsPixmapItem(game.m_background.scaled(sceneRect().width(), sceneRect().height()));
+    addItem(m_background);
+
+    m_frame = new QGraphicsPixmapItem(game.m_frame);
+    addItem(m_frame);
+    m_frame->moveBy(15, 31);
+}
+
+void GameScene::rotateFigure()
+{
     if (game.m_rotate)
     {
         Point p = game.m_a[1]; //center of rotation
@@ -197,6 +270,19 @@ void GameScene::update()
         }
         game.m_rotate = false;
     }
+}
+
+void GameScene::update()
+{
+    if(game.m_state == Game::State::Active)
+    {
+        game.m_timer += (timePerFrame);
+    }
+
+    moveFigure();
+
+    //////Rotate//////
+    rotateFigure();
 
     ///////Tick//////
     if ( game.m_timer > game.m_delay)
@@ -258,7 +344,11 @@ void GameScene::update()
 
     game.m_dx=0; game.m_rotate=false; //game.m_delay = Game::SPEED;
 
-    //draw
+    //drawing
+    clear();
+
+    drawBackground();
+
     for (int i=0;i<game.BOARD_HEIGHT;i++)
     {
         for (int j=0;j<game.BOARD_WIDTH;j++)
@@ -272,68 +362,9 @@ void GameScene::update()
 
     }
 
-    for (int i = 0; i < Game::COUNT_OF_BLOCKS; i++)
-    {
-        QGraphicsPixmapItem* pixmapItem = new QGraphicsPixmapItem(game.m_tile.copy(game.m_colorNum * 18, 0, 18, 18));
-        addItem(pixmapItem);
-        pixmapItem->setPos(game.m_a[i].x * Game::BLOCK_SIZE.width(), game.m_a[i].y * Game::BLOCK_SIZE.height());
-        pixmapItem->moveBy(m_frame->pos().x(), m_frame->pos().y());
-    }
+    drawActiveFigure();
 
-    QGraphicsPixmapItem* scorePixmapItem = new QGraphicsPixmapItem(game.m_scorePixmap.scaled(130,32));
-    addItem(scorePixmapItem);
-    scorePixmapItem->moveBy(190,270);
-    QString scoreText = QString::number(game.m_score);
-    int unityPartVal = 0;
-    int decimalPartValue = 0;
-    int hendredthPartValue = 0;
+    drawScore();
 
-    if(scoreText.length() == 1) // 0 - 9
-    {
-        unityPartVal = scoreText.toInt();
-        decimalPartValue = 0;
-        hendredthPartValue = 0;
-    }
-    else if(scoreText.length() == 2) // 10 - 99
-    {
-        unityPartVal = scoreText.last(1).toInt();
-        decimalPartValue = scoreText.first(1).toInt();
-        hendredthPartValue = 0;
-    }
-    else if(scoreText.length() == 3) // 100 - 999
-    {
-        unityPartVal = scoreText.last(1).toInt();
-        hendredthPartValue = scoreText.first(1).toInt();
-        QString copyVal = scoreText;
-        copyVal.chop(1);
-        decimalPartValue = copyVal.last(1).toInt();
-    }
-
-    QGraphicsPixmapItem* unityPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(unityPartVal*32, 0, 32, 32));
-    unityPartScoreItem->moveBy(Game::RESOLUTION.width()-32, scorePixmapItem->y()+32);
-    addItem(unityPartScoreItem);
-
-    QGraphicsPixmapItem* decimalPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(decimalPartValue*32, 0, 32, 32));
-    decimalPartScoreItem->moveBy(Game::RESOLUTION.width()-2*32, scorePixmapItem->y()+32);
-    addItem(decimalPartScoreItem);
-
-    QGraphicsPixmapItem* hundrethPartScoreItem = new QGraphicsPixmapItem(game.m_numbersPixmap.copy(hendredthPartValue*32, 0, 32, 32));
-    hundrethPartScoreItem->moveBy(Game::RESOLUTION.width()-3*32, scorePixmapItem->y()+32);
-    addItem(hundrethPartScoreItem);
-
-    if(game.m_state == Game::State::Paused)
-    {
-        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(game.m_pauseBackground);
-        addItem(item);
-    }
-    if(game.m_gameOver)
-    {
-        game.m_state = Game::State::Game_Over;
-        QGraphicsPixmapItem* item = new QGraphicsPixmapItem(game.m_gameOverBackground);
-        addItem(item);
-
-        QGraphicsPixmapItem* restartTextItem = new QGraphicsPixmapItem(game.m_restartTextPixmap);
-        addItem(restartTextItem);
-        restartTextItem->setPos(16, 350);
-    }
+    drawGameState();
 }
