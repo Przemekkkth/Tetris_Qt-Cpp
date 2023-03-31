@@ -25,6 +25,7 @@ qmake && make
 ```
 ## Addons
 * [Qt](https://www.qt.io/) - Cross-Platform software for embedded & desktop
-* [SFX](https://www.leshylabs.com/apps/sfMaker/)) - sound effects
+* [SFX](https://www.leshylabs.com/apps/sfMaker/) - sound effects
 * [Video](https://youtu.be/CyErbZoVSvc) - gameplay
 * [wiki](https://github.com/Przemekkkth/Tetris_Qt-Cpp/wiki) - explanantion of code, etc.
+* [Play online](https://przemekkkth.github.io/assets/games/tetris/index.html)
